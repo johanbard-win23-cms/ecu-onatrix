@@ -1,0 +1,46 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper;
+@{
+	Layout = null;
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "siteSettings") ?? null;
+    var siteTitle = settings?.Value<string>("siteTitle") ?? "Site title unavaliable";
+    var siteMotto = settings?.Value<string>("siteMotto") ?? "Site motto unavaliable";
+
+    var pageTitle = !string.IsNullOrEmpty(ViewBag?.Title) ? $"{ViewBag?.Title}" : $"{siteTitle}";
+    var pageMotto = !string.IsNullOrEmpty(ViewBag?.Motto) ? $"{ViewBag?.Motto}" : $"{siteMotto}";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@pageTitle - @pageMotto</title>
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    
+    <!-- FONTAWESOME -->
+    <script defer src="https://kit.fontawesome.com/3684d119b8.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    @await Html.PartialAsync("static/header")
+	
+	<main>
+		@RenderBody()
+	</main>
+
+	 @await Html.PartialAsync("static/footer")
+
+    <script src="/scripts/main.js"></script>
+</body>
+</html>

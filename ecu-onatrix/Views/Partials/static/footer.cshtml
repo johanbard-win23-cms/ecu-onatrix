@@ -1,0 +1,16 @@
+﻿@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper;
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "siteSettings") ?? null;
+    var siteTitle = settings?.Value<string>("siteTitle") ?? "Site title unavaliable";
+    var footerText = settings?.Value<string>("footerText") ?? "Footer text unavaliable";
+    var footerHtml = new HtmlString($"{footerText}");
+}
+
+<footer class="w-full">
+        <div class="w-full d-flex center container">
+            <div class="w-max box">
+                <div class="footer-text">© @siteTitle. All Rights Reserved. @footerHtml</div>
+            </div>
+        </div>
+</footer>

@@ -1,0 +1,42 @@
+﻿@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper;
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "siteSettings") ?? null;
+
+    var officeAddress = settings?.Value<string>("officeAddress") ?? null;
+    var officePostalCodeCity = settings?.Value<string>("officePostalCodeCity") ?? null;
+    var siteLogoUrl = settings?.Value<IPublishedContent>("siteLogo")?.Url() ?? null;
+    var topBarText = settings?.Value<string>("topBarText") ?? null;
+    var topBarHtml = String.IsNullOrEmpty(topBarText) ? new HtmlString($"{officeAddress}, {officePostalCodeCity}") : new HtmlString($"{topBarText}");
+
+    var facebookUrl = settings?.Value<string>("facebookUrl") ?? null;
+    var xUrl = settings?.Value<string>("xUrl") ?? null;
+    var linkedInUrl = settings?.Value<string>("linkedInUrl") ?? null;
+}
+
+<header>
+    <div class="container w-full d-flex column">
+        <div class="w-full d-flex center top">
+            <div class="content-box w-max d-flex center space-between">
+                <div class="address-box note-1">@topBarHtml</div>
+                <div class="d-flex center social-box">
+                    <a href="@facebookUrl" target="_blank" class="btn-social"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="@xUrl" class="btn-social"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="@linkedInUrl" class="btn-social"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>    
+        </div>
+        <div class="w-full d-flex center bottom">
+            <div class="content-box w-max d-flex center space-between">
+                <a href="/home"><img src="@siteLogoUrl" alt="Logo" class="logo"></a>
+                <nav>
+                    <a href="/about" class="nav-item">About</a>
+                    <a href="/services" class="nav-item">Services</a>
+                    <a href="/projects" class="nav-item">Projects</a>
+                    <a href="/contact" class="nav-item">Contact</a>
+                </nav>
+                <button class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+    </div>
+</header>
