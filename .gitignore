@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/ecu-onatrix/FileContentIndex/5655781c-50cd-4c76-8067-031421fd4da5.vsidx
+*.vsidx
+/.vs/ecu-onatrix/DesignTimeBuild/.dtbcache.v2
