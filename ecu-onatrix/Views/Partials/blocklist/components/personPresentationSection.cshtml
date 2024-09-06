@@ -1,0 +1,29 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+
+    var sectionImage = Model?.Content.Value<IPublishedContent>("sectionImage")?.Url();
+    var sectionImageText = Model?.Content.Value<string>("sectionImageText");
+
+    var sectionQuote = Model?.Content.Value<string>("sectionQuote");
+    var sectionText = Model?.Content.Value<string>("sectionText") ?? "Text unavaliable";
+    var sectionHtml = new HtmlString($"{sectionText}");
+}
+
+<section class="person-presentation">
+    <div class="w-full d-flex center container">
+        <div class="w-max box">
+            <div class="image">
+                <img src="@sectionImage" alt="">
+                <div class="img-text">@sectionImageText</div>
+            </div>
+            <div class="text">
+                <div class="quote">“@sectionQuote”</div>
+                
+                @sectionHtml
+
+            </div>
+        </div>
+    </div>
+</section>

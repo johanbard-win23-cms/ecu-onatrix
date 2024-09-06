@@ -1,0 +1,43 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var sectionLabel = Model?.Content.Value<string>("sectionLabel");
+    var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+    var sectionText = Model?.Content.Value<string>("sectionText");
+
+    var sectionStars = Model?.Content.Value<decimal>("sectionStars");
+
+    var sectionCustomerName = Model?.Content.Value<string>("sectionCustomerName");
+    var sectionCustomerFirm = Model?.Content.Value<string>("sectionCustomerFirm");
+
+    var sectionImage = Model?.Content.Value<IPublishedContent>("sectionImage")?.Url();
+}
+
+<section class="review">
+    <div class="w-full d-flex center container">
+        <img src="@sectionImage" alt="">
+        <div class="w-max box">
+            <div class="w-half content">
+                <div class="label capitalize">@sectionLabel</div>
+                <h2>@sectionTitle</h2>
+                <div class="text">@sectionText</div>
+                <div class="stars d-flex">
+                    @{
+                        for (int i = 2; i < 12; i = i + 2) 
+                        {
+                            if (i <= sectionStars) 
+                                { <i class="fa-solid fa-star"></i> }
+                            else if (i - sectionStars == 1) 
+                                { <i class="fa-solid fa-star-half-stroke"></i> }
+                            else 
+                                { <i class="fa-regular fa-star"></i> }
+                        }
+                    }
+                </div>
+                <div class="name">@sectionCustomerName</div>
+                <div class="brand">@sectionCustomerFirm</div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+@inject IPublishedUrlProvider PublishedUrlProvider
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper;
+@{
+
+    var pageTitle = !string.IsNullOrEmpty(ViewBag?.Title) ? $"{ViewBag?.Title}" : "Unknown";
+    var breadcrumbs = Model.Ancestors().ToArray();
+
+}
+
+<section class="page-top">
+    <div class="w-full d-flex center container">
+        <img src="./img/page-top-bg-left.svg" alt="" class="bg-img-left">
+        <img src="./img/page-top-bg-right.svg" alt="" class="bg-img-right">
+        <div class="box d-flex column center">
+            <h1 class="h2">@pageTitle</h1>
+            <div class="breadcrumbs d-flex center">
+                @foreach (var crumb in breadcrumbs.OrderBy(x => x.Level))
+                {
+                    <a href="@crumb.Url(PublishedUrlProvider)">@crumb.Name</a>
+                    <i class="fa-solid fa-chevron-right"></i>
+                }
+                <div class="current">About</div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,60 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var sectionLabel = Model?.Content.Value<string>("sectionLabel");
+    var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+}
+
+<section class="our-projects">
+    <div class="w-full d-flex center container">
+        <div class="w-full d-flex column box">
+            <div class="hs w-max">
+                <div class="label capitalize">@sectionLabel</div>
+                <h2>@sectionTitle</h2>
+            </div>
+            <div class="carousel w-full">
+                <a href="">
+                    <div class="card">
+                        <img src="./img/carousel.svg" alt="" class="card-img">
+                        <div class="bottom">
+                            <div class="card-heading subt-1">Business Insights for SP Group Inc.</div>
+                            <div class="card-text">Financial Services</div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="card">
+                        <img src="./img/carousel.svg" alt="" class="card-img">
+                        <div class="bottom">
+                            <div class="card-heading subt-1">Business Insights for SP Group Inc.</div>
+                            <div class="card-text">Financial Services</div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="card">
+                        <img src="./img/carousel.svg" alt="" class="card-img">
+                        <div class="bottom">
+                            <div class="card-heading subt-1">Business Insights for SP Group Inc.</div>
+                            <div class="card-text">Financial Services</div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="card">
+                        <img src="./img/carousel.svg" alt="" class="card-img">
+                        <div class="bottom">
+                            <div class="card-heading subt-1">Business Insights for SP Group Inc.</div>
+                            <div class="card-text">Financial Services</div>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

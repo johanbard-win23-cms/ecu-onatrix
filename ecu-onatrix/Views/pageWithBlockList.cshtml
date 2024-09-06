@@ -3,8 +3,10 @@
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
 	Layout = "mainLayout.cshtml";
-	ViewBag.Title = Model.Value("pageTitle") ?? null;
+    ViewBag.Title = Model.Value("pageTitle") ?? null;
     ViewBag.Motto = Model.Value("pageMotto") ?? null;
 }
+
+@await Html.PartialAsync("static/pageTop")
 
 @Html.GetBlockListHtml(Model, "pageSections")
