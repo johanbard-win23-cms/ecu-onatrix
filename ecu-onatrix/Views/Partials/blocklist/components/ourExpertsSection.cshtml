@@ -1,0 +1,97 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var sectionLabel = Model?.Content.Value<string>("sectionLabel");
+    var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+
+    var image11 = Model?.Content.Value<IPublishedContent>("expertImage11")?.Url();
+    var name11 = Model?.Content.Value<string>("expertName11");
+    var title11 = Model?.Content.Value<string>("expertTitle11");
+
+    var image12 = Model?.Content.Value<IPublishedContent>("expertImage12")?.Url();
+    var name12 = Model?.Content.Value<string>("expertName12");
+    var title12 = Model?.Content.Value<string>("expertTitle12");
+
+    var image13 = Model?.Content.Value<IPublishedContent>("expertImage13")?.Url();
+    var name13 = Model?.Content.Value<string>("expertName13");
+    var title13 = Model?.Content.Value<string>("expertTitle13");
+
+    var image21 = Model?.Content.Value<IPublishedContent>("expertImage21")?.Url();
+    var name21 = Model?.Content.Value<string>("expertName21");
+    var title21 = Model?.Content.Value<string>("expertTitle21");
+
+    var image22 = Model?.Content.Value<IPublishedContent>("expertImage22")?.Url();
+    var name22 = Model?.Content.Value<string>("expertName22");
+    var title22 = Model?.Content.Value<string>("expertTitle22");
+
+    var image23 = Model?.Content.Value<IPublishedContent>("expertImage23")?.Url();
+    var name23 = Model?.Content.Value<string>("expertName23");
+    var title23 = Model?.Content.Value<string>("expertTitle23");
+
+    var image24 = Model?.Content.Value<IPublishedContent>("expertImage24")?.Url();
+    var name24 = Model?.Content.Value<string>("expertName24");
+    var title24 = Model?.Content.Value<string>("expertTitle24");
+}
+
+<section class="experts">
+    <div class="w-full d-flex center container">
+        <div class="w-max d-flex column center box">
+            <div class="label capitalize">@sectionLabel</div>
+            <h2 class="w-half">@sectionTitle</h2>
+            <div class="three">
+                <div class="card">
+                    <img src="@image11" alt="">
+                    <div class="text">
+                        <div class="h5 name">@name11</div>
+                        <div class="title">@title11</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="@image12" alt="">
+                    <div class="text">
+                        <div class="h5 name">@name12</div>
+                        <div class="title">@title12</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="@image13" alt="">
+                    <div class="text">
+                        <div class="h5 name">@name13</div>
+                        <div class="title">@title13</div>
+                    </div>
+                </div>
+            </div>
+            <div class="four">
+                <div class="card">
+                    <img src="@image21" alt="">
+                    <div class="text">
+                        <div class="h5 name">@name21</div>
+                        <div class="title">@title21</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="@image22" alt="">
+                    <div class="text">
+                        <div class="h5 name">@name22</div>
+                        <div class="title">@title22</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="@image23" alt="">
+                    <div class="text">
+                        <div class="h5 name">@name23</div>
+                        <div class="title">@title23</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="@image24" alt="">
+                    <div class="text">
+                        <div class="h5 name">@name24</div>
+                        <div class="title">@title24</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
