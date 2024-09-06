@@ -479,4 +479,4 @@ $RECYCLE.BIN/
 /umbraco/Logs/
 
 # Media files
-/wwwroot/media/
+#/wwwroot/media/ <-- XXX
