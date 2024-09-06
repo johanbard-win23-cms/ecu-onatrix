@@ -5,3 +5,8 @@
 /.vs/ecu-onatrix/FileContentIndex/5655781c-50cd-4c76-8067-031421fd4da5.vsidx
 *.vsidx
 /.vs/ecu-onatrix/DesignTimeBuild/.dtbcache.v2
+/.vs/ecu-onatrix/config/applicationhost.config
+/.vs/ecu-onatrix/v17/.suo
+/.vs/ecu-onatrix/v17/.wsuo
+/ecu-onatrix/appsettings-schema.Umbraco.Cms.json
+/ecu-onatrix/umbraco-package-schema.json
