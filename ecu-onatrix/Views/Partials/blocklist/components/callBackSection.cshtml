@@ -1,0 +1,50 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var sectionLabel = Model?.Content.Value<string>("sectionLabel");
+    var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+    var sectionText = Model?.Content.Value<string>("sectionText");
+    var sectionBackgroundImage = Model?.Content.Value<IPublishedContent>("sectionBackgroundImage")?.Url();
+}
+
+<section class="map-contact-us white">
+    <div class="w-full container">
+        <div class="w-full map-overlay"><img src="/media/static-images/map.svg" alt="" class="map"></div>
+        <div class="w-max d-flex column center box">
+            <div class="label capitalize">@sectionLabel</div>
+            <form class="contact">
+                <fieldset class="d-flex column center">
+                    <legend class="h2 w-half">@sectionTitle</legend>
+                    <div class="text italic w-half">@sectionText</div>
+                    <div class="inputs">
+                        <div class="input-box">
+                            <label for="name">
+                                <input type="text" id="name" name="name" value="" placeholder="Name">
+                            </label>
+                            <label for="email">
+                                <input type="text" id="email" name="email" value="" placeholder="Email address">
+                            </label>
+                        </div>
+                        <div class="input-box">
+                            <label for="phone">
+                                <input type="text" id="phone" name="phone" value="" placeholder="Phone">
+                            </label>
+                            <label for="contact-target">
+                                <div class="select-box">
+                                <select name="contact-target" id="contact-target">
+                                    <option value="financial">Financial consulting</option>
+                                    <option value="export">Exports consulting</option>
+                                    <option value="emotion">Emotional consulting</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                            </label>
+                        </div>
+                        <input class="btn-theme" type="submit" value="Submit">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>
