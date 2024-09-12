@@ -1,5 +1,15 @@
-﻿@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper;
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper;
 @{
+    var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
+
     var rootContents = UmbracoHelper.ContentAtRoot();
     var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "siteSettings") ?? null;
 
@@ -30,10 +40,15 @@
             <div class="content-box w-max d-flex center space-between">
                 <a href="/home"><img src="@siteLogoUrl" alt="Logo" class="logo"></a>
                 <nav>
-                    <a href="/about" class="nav-item">About</a>
-                    <a href="/services" class="nav-item">Services</a>
-                    <a href="/projects" class="nav-item">Projects</a>
-                    <a href="/contact" class="nav-item">Contact</a>
+                    @if (selection?.Length > 0)
+                    {
+                        @foreach (var item in selection)
+                        {
+                            @if (item.IsAncestorOrSelf(Model)) {<div class="nav-item current">@item.Name</div> }
+                            else { <a class="nav-item" href="@item.Url(PublishedUrlProvider)">@item.Name</a> }
+                            
+                        }
+                    }
                 </nav>
                 <button class="search"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>

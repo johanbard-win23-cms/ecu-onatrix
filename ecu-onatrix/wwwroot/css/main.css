@@ -555,6 +555,11 @@ nav .nav-item:hover {
   text-decoration: none;
   border-bottom: 2px solid;
 }
+nav .nav-item.current {
+  color: #D9C3A9;
+  border-bottom: 2px solid #D9C3A9;
+  cursor: default;
+}
 
 form.help-box {
   padding: 1rem;
@@ -1066,20 +1071,27 @@ section.experts {
 section.experts .container .box h2 {
   text-align: center;
 }
-section.experts .container .box .card {
+section.experts .container .box div.expert-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+section.experts .container .box div.expert-row .card {
   border: 1px solid #e5e5e5;
 }
-section.experts .container .box .card img {
+section.experts .container .box div.expert-row .card img {
   aspect-ratio: 1/1;
   object-fit: cover;
 }
-section.experts .container .box .card .text {
+section.experts .container .box div.expert-row .card .text {
   padding: 1rem;
 }
-section.experts .container .box .card .text .name {
+section.experts .container .box div.expert-row .card .text .name {
   margin: 0;
 }
-section.experts .container .box .card .text .title {
+section.experts .container .box div.expert-row .card .text .title {
   line-height: 1.6;
   font-weight: 400;
   font-size: 16px;
@@ -1088,16 +1100,8 @@ section.experts .container .box .card .text .title {
   font-size: 13px;
   line-height: auto;
 }
-section.experts .container .box .three {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-}
-section.experts .container .box .four {
-  padding-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
+section.experts .container .box div.expert-row .first {
+  margin: 0;
 }
 
 section.let-us-know {

@@ -1,0 +1,16 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var expertImage = Model?.Content.Value<IPublishedContent>("expertImage")?.Url();
+    var expertName = Model?.Content.Value<string>("expertName");
+    var expertTitle = Model?.Content.Value<string>("expertTitle");
+}
+
+<div class="card">
+    <img src="@expertImage" alt="">
+    <div class="text">
+        <div class="h5 name">@expertName</div>
+        <div class="title">@expertTitle</div>
+    </div>
+</div>
