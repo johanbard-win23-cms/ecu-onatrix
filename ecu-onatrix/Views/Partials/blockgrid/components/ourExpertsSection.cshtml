@@ -4,29 +4,32 @@
 @{
     var sectionLabel = Model?.Content.Value<string>("sectionLabel");
     var sectionTitle = Model?.Content.Value<string>("sectionTitle");
-    var expertRows = Model?.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>>("expertRows") ?? null;
+    // var expertRows = Model?.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>>("expertRows") ?? null;
 }
 
 <section class="experts">
     <div class="w-full d-flex center container">
         <div class="w-max d-flex column center box">
-            <div class="label capitalize">@sectionLabel</div>
+            <div class="label uppercase">@sectionLabel</div>
             <h2 class="w-half">@sectionTitle</h2>
             
             @* @await Html.GetBlockGridHtmlAsync(Model.Content.Value<Umbraco.Cms.Core.Models.Blocks.BlockGridModel>("expertRows"), "expertRows"); *@
             @* @await Html.GetBlockGridItemAreasHtmlAsync(Model) *@
 
-            <div>@expertRows</div>
+            @* <div>@expertRows</div> *@
 
-            @foreach (var row in expertRows)
+            @* @foreach (var row in expertRows)
             {
-                <div>@(row.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>>("expertCards"))</div>
+                @*<div>@(row.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>>("expertCards"))</div> *@
                 @* @await Html.GetBlockGridHtmlAsync(row.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>>("expertCards"), "expertCards"); *@
                 @* @await Html.GetBlockGridItemAreasHtmlAsync(row.Content.Value<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>("expertCards")) *@
-            }
+            
            
+            @* @Model.Content.Value("expertRows") *@
+            @* @await Html.GetBlockGridHtmlAsync(Model, "expertRows") *@
             
-            
+            @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+
         </div>
     </div>
 </section>

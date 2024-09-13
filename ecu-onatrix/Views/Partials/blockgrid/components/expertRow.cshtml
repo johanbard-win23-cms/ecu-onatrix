@@ -6,6 +6,9 @@
 }
 
 <div class="expert-row">
-    @await Html.GetBlockGridHtmlAsync(Model, "expertCards")
-    @await Html.GetBlockGridItemAreasHtmlAsync(Model, "expertCards")
+    @* @await Html.GetBlockGridHtmlAsync(Model, "expertCards") *@
+    @* @await Html.GetBlockGridItemAreasHtmlAsync(Model, "expertCards") *@
+    @* @await Html.GetBlockGridHtmlAsync(Model, "expertCards") *@
+
+    @await Html.GetBlockGridItemAreasHtmlAsync(Model)
 </div>
