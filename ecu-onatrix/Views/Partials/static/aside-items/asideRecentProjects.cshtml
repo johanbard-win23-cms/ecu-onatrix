@@ -1,0 +1,35 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))
+    .ChildrenOfType("projectItemTemplate")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.CreateDate);
+
+    var firstFive = selection.Take(5);
+}
+
+<div class="recent-projects-box">
+    <div class="h5">Recent projects</div>
+    <div class="deck d-flex column">
+        @foreach (var item in firstFive) 
+        {
+            var thumbnailImage = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+            var title = item?.Value<string>("pageTitle") ?? "";
+            if (!string.IsNullOrEmpty(title) && title.Length > 30) { title = title?[0..Math.Min(title.Length, 30)] + "...";}
+            var date = item?.Value<DateTime>("pageDate").ToString("MMMM dd, yyyy") ?? "";
+
+            <a href="@item.Url()">
+            <div class="card">
+                <img src="@thumbnailImage" alt="@title" class="card-img">
+                <div class="card-content">
+                    <div class="heading">@title</div>
+                    <div class="date"><i class="fa-solid fa-calendar-days"></i>@date</div>
+                </div>
+            </div>
+            </a>
+        }
+        
+    </div>
+</div>

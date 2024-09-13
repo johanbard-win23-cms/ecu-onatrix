@@ -1,0 +1,61 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var sectionLabel = Model?.Content.Value<string>("sectionLabel");
+    var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+    var sectionQuote = Model?.Content.Value<string>("sectionQuote");
+    var sectionText = Model?.Content.Value<string>("sectionText");
+    var sectionSignature = Model?.Content.Value<IPublishedContent>("sectionSignature")?.Url();
+    var sectionSignatureText = Model?.Content.Value<string>("sectionSignatureText");
+}
+
+<section class="about-us">
+    <div class="w-full d-flex center container">
+        <div class="w-max box">
+            <div class="w-half about-content">
+                <div class="label capitalize">@sectionLabel</div>
+                <h2>@sectionTitle</h2>
+                <div class="quote">“@sectionQuote”</div>
+                <p>@sectionSignatureText</p>
+                <div class="signature">
+                    <img src="@sectionSignature" alt="">
+                    <p>@sectionSignatureText</p>
+                </div>
+            </div>
+            <div class="w-half about-form">
+                <form>
+                    <fieldset>
+                        <legend class="h3">Request a call back</legend>
+                        <div class="inputs">
+                            <div class="italic">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat</div>
+                            <label for="name">
+                                <input type="text" id="name" name="name" value="" placeholder="Name">
+                            </label>
+                            <label for="email">
+                                <input type="text" id="email" name="email" value="" placeholder="Email address">
+                            </label>
+                            <label for="phone">
+                                <input type="text" id="phone" name="phone" value="" placeholder="Phone">
+                            </label>
+                            <label for="phone">
+                                <input type="text" id="phone" name="phone" value="" placeholder="Phone">
+                            </label>
+                            <label for="contact-target">
+                                <div class="select-box">
+                                <select name="contact-target" id="contact-target">
+                                    <option value="financial">Financial consulting</option>
+                                    <option value="export">Exports consulting</option>
+                                    <option value="emotion">Emotional consulting</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                            </label>
+                            <input class="btn-sub1" type="submit" value="Submit">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

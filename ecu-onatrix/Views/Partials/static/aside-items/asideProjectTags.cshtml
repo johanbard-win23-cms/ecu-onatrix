@@ -1,0 +1,27 @@
+﻿@using Umbraco.Cms.Core.PublishedCache;
+@inject ITagQuery TagQuery;
+@{
+
+ var selection = TagQuery.GetAllContentTags("projectTags");
+
+ var currentTag = Context.Request.Query["tag"];
+
+}
+
+<div class="tags-box">
+    <div class="h5">Tags</div>
+    <div class="tags">
+        @foreach (var item in selection) 
+        {
+            @if (@item.Text.ToLower() == @currentTag)
+            {
+                <a href="/projects?tag=@item.Text.ToLower()" class="btn-tag current">@item.Text</a>
+            }
+            else
+            {
+                <a href="/projects?tag=@item.Text.ToLower()" class="btn-tag">@item.Text</a>
+            }
+            
+        }
+    </div>
+</div>

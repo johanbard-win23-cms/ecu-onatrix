@@ -7,4 +7,4 @@
     ViewBag.Motto = Model.Value("pageMotto") ?? null;
 }
 
-@Html.GetBlockListHtml(Model, "pageSections")
+@await Html.GetBlockGridHtmlAsync(Model, "pageLayout")

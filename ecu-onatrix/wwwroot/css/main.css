@@ -36,6 +36,32 @@ p {
   font-family: "Poppins", sans-serif;
 }
 
+strong {
+  font-weight: 700;
+}
+
+em, .italic {
+  font-style: italic;
+}
+
+ul, ol {
+  margin-bottom: 0.75rem;
+}
+
+ul {
+  list-style-type: circle;
+}
+ul li {
+  margin-left: 0.5rem;
+}
+
+ol {
+  list-style-type: decimal;
+}
+ol li {
+  margin-left: 0.5rem;
+}
+
 .text-xs {
   line-height: 1.6;
   font-weight: 400;
@@ -308,8 +334,8 @@ h6, .h6 {
   text-transform: capitalize;
 }
 
-.italic {
-  font-style: italic;
+.uppercase {
+  text-transform: uppercase;
 }
 
 .wrapper {
@@ -558,7 +584,6 @@ nav .nav-item:hover {
 nav .nav-item.current {
   color: #D9C3A9;
   border-bottom: 2px solid #D9C3A9;
-  cursor: default;
 }
 
 form.help-box {
@@ -596,6 +621,37 @@ form.help-box fieldset .input-box button {
 }
 form.help-box fieldset .input-box button i {
   cursor: pointer;
+}
+
+.pagination {
+  gap: 1rem;
+}
+.pagination .number {
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination .number a {
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 16px;
+  color: #535656;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px !important;
+  border: none !important;
+}
+.pagination .number.active {
+  border: 1px solid #D9C3A9 !important;
+  border-radius: 25px;
+}
+.pagination .change {
+  padding: 0 !important;
+  border: none !important;
+}
+.pagination .change.inactive {
+  color: #e5e5e5;
 }
 
 header {
@@ -800,6 +856,7 @@ section.our-services .container .box .card-box a .card .img-wrapper {
 }
 section.our-services .container .box .card-box a .card .img-wrapper img {
   width: 100%;
+  aspect-ratio: 1/1;
   object-fit: cover;
 }
 section.our-services .container .box .card-box a:hover {
@@ -812,8 +869,11 @@ section.our-services .container .box .card-box a:hover .card .h5 {
   text-decoration: underline;
 }
 section.our-services .container .box .card-box a:hover .card .img-wrapper img {
-  transform: scale(1.2);
+  transform: scale(1.2) rotate(3deg);
   transform-origin: 50% 50%;
+}
+section.our-services .container .box .pagination {
+  margin-top: 2rem;
 }
 
 section.our-story {
@@ -1200,8 +1260,8 @@ section.projects-page .container .box .content a .card {
   gap: 2rem;
 }
 section.projects-page .container .box .content a .card .card-img {
-  height: 100%;
   width: 100%;
+  aspect-ratio: 1.85/1;
   object-fit: cover;
 }
 section.projects-page .container .box .content a .card .card-content {
@@ -1331,14 +1391,17 @@ section.service-item .container .box .line::after {
   height: 80%;
   background-color: #e5e5e5;
 }
-section.service-item .container .box .content * {
-  width: 100%;
+section.service-item .container .box .content p {
+  margin-bottom: 0.75rem;
 }
 
 section.project-item .container .box {
   display: grid;
   grid-template-columns: 3fr 1px 1fr;
   gap: 2rem;
+}
+section.project-item .container .box .content p {
+  margin-bottom: 0.75rem;
 }
 section.project-item .container .box .content .project-tags {
   display: flex;
@@ -1399,8 +1462,8 @@ section.project-item .container .box aside .recent-projects-box a .card {
   gap: 1rem;
 }
 section.project-item .container .box aside .recent-projects-box a .card .card-img {
-  height: 80%;
   width: 100%;
+  aspect-ratio: 1.25/1;
   object-fit: cover;
   align-self: center;
 }

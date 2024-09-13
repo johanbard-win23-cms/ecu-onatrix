@@ -44,7 +44,7 @@
                     {
                         @foreach (var item in selection)
                         {
-                            @if (item.IsAncestorOrSelf(Model)) {<div class="nav-item current">@item.Name</div> }
+                            @if (item.IsAncestorOrSelf(Model)) { <a class="nav-item current" href="@item.Url(PublishedUrlProvider)">@item.Name</a> }
                             else { <a class="nav-item" href="@item.Url(PublishedUrlProvider)">@item.Name</a> }
                             
                         }

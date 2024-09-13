@@ -1,0 +1,48 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "siteSettings") ?? null;
+
+    var officeAddress = settings?.Value<string>("officeAddress") ?? null;
+    var officePostalCodeCity = settings?.Value<string>("officePostalCodeCity") ?? null;
+    var officePhone = settings?.Value<string>("officePhone") ?? null;
+    var officeEmail = settings?.Value<string>("officeEmail") ?? null;
+
+    var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+    var sectionBackgroundColor = Model?.Content.Value("sectionBackgroundColor");
+    var sectionBackgroundImage = Model?.Content.Value<IPublishedContent>("sectionBackgroundImage")?.Url();
+    var sectionImage = Model?.Content.Value<IPublishedContent>("sectionImage")?.Url();
+}
+
+<section class="let-us-know" style="background-color: @sectionBackgroundColor">
+    <div class="w-full d-flex center container">
+        <div class="w-max d-flex center box">
+            <div class="w-half left">
+                <img src="@sectionBackgroundImage" alt="" class="dotnslide">
+                <img src="@sectionImage" alt="" class="dude">
+            </div>
+            <div class="w-half d-flex column right">
+                <h2>@sectionTitle</h2>
+                <div class="text-grid office">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div class="heading">Office location</div>
+                    <div class="text">@officeAddress, @officePostalCodeCity</div>
+                </div>
+                <div class="text-grid phone">
+                    <i class="fa-solid fa-phone"></i>
+                    <div class="heading">Phone number</div>
+                    <div class="text">@officePhone</div>
+                </div>
+                <div class="text-grid email">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div class="heading">Office email</div>
+                    <div class="text">@officeEmail</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

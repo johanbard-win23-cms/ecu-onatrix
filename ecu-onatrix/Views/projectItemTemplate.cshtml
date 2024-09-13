@@ -1,0 +1,44 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model.Value("pageTitle") ?? null;
+    ViewBag.Motto = Model.Value("pageMotto") ?? null;
+
+    var title = Model?.Value<string>("pageTitle") ?? "";      
+    var date = Model?.Value<DateTime>("pageDate").ToString("MMMM dd, yyyy") ?? "";
+    var tags = Model.Value<IEnumerable<string>>("pageTags");
+}
+
+@await Html.PartialAsync("static/pageTop")
+
+<section class="project-item">
+    <div class="w-full d-flex center container">
+        <div class="w-max box">
+                <div class="content">
+                <div class="date"><i class="fa-solid fa-calendar-days"></i>June 15, 2024</div>
+                <div class="content">
+                    @Model.Value("pageContent")
+                </div>
+                <div class="project-tags">
+                    <div class="heading">Tags:</div>
+                    @foreach(var tag in tags)
+                    {
+                        <div class="project-tag">@tag</div>
+                    }
+                </div>
+                </div>
+                <div class="line"></div>
+                <aside>
+                @await Html.PartialAsync("static/aside-items/asideRecentProjects")
+                @await Html.PartialAsync("static/aside-items/asideProjectTags")
+                @await Html.PartialAsync("static/aside-items/asideHelpForm")
+
+                </aside>
+            
+        </div>
+    </div>
+</section>
+
+@await Html.GetBlockGridHtmlAsync(Model, "pageBottomLayout")

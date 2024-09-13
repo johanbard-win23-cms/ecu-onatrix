@@ -1,0 +1,44 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var sectionLabel = Model?.Content.Value<string>("sectionLabel");
+    var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+    
+    var number1 = Model?.Content.Value<string>("number1");
+    var number1Text = Model?.Content.Value<string>("number1Text");
+    var number2 = Model?.Content.Value<string>("number2");
+    var number2Text = Model?.Content.Value<string>("number2Text");
+    var number3 = Model?.Content.Value<string>("number3");
+    var number3Text = Model?.Content.Value<string>("number3Text");
+
+    var sectionBackground = Model?.Content.Value<IPublishedContent>("sectionBackground")?.Url();
+    var sectionImage = Model?.Content.Value<IPublishedContent>("sectionImage")?.Url();
+}
+
+<section class="success-stories">
+    <div class="w-full d-flex center container">
+        <div class="w-max box">
+            <img src="@sectionBackground" alt="" class="bg-img">
+            <div class="content">
+                <div class="label capitalize">@sectionLabel</div>
+                <h2 class="w-half color">@sectionTitle</h2>
+                <div class="card-box">
+                    <div class="card">
+                        <div class="card-number">@number1</div>
+                        <div class="card-text">@number1Text</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-number">@number2</div>
+                        <div class="card-text">@number2Text</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-number">@number3</div>
+                        <div class="card-text">number3Text</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="@sectionImage" alt="" class="bottom-img">
+</section>

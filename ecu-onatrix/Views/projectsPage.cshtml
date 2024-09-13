@@ -1,10 +1,108 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PublishedCache;
+@inject ITagQuery TagQuery;
 @{
 	Layout = "mainLayout.cshtml";
     ViewBag.Title = Model.Value("pageTitle") ?? null;
     ViewBag.Motto = Model.Value("pageMotto") ?? null;
+
+    var selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))
+    .ChildrenOfType("projectItemTemplate")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.CreateDate);
+
+    var currentTag = Context.Request.Query["tag"].ToString();
+
+    if (currentTag != null)
+    {
+       // selection = TagQuery.GetContentByTag(currentTag);
+    }
+
+    var itemsPerPage = 6;
+
+    if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
+        currentPage = 1;
+
+    var totalItems = selection?.Count() ?? 0;
+    var pagedItems = selection.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
 }
 
 @await Html.PartialAsync("static/pageTop")
+
+<section class="projects-page">
+    <div class="w-full d-flex center container">
+        <div class="w-max box d-flex">
+            <div class="content d-flex column">
+                @if (pagedItems != null)
+                {
+                    @foreach (var item in pagedItems) 
+                    {
+                        var title = item?.Value<string>("pageTitle") ?? "";
+                        if (!string.IsNullOrEmpty(title) && title.Length > 30) { title = title?[0..Math.Min(title.Length, 30)] + "...";}
+                        
+                        var date = item?.Value<DateTime>("pageDate").ToString("MMMM dd, yyyy") ?? "";
+                        var thumbnailImage = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                        var preamble = item?.Value<string>("preamble") ?? "";
+
+                        <a href="@item.Url()">
+                            <div class="card">
+                                <img src="@thumbnailImage" alt="@title" class="card-img">
+                                <div class="card-content">
+                                    <h2 class="h5">@title</h2>
+                                    <div class="date"><i class="fa-solid fa-calendar-days"></i>@date</div>
+                                    <div class="card-text">@preamble</div>
+                                    <div class="read-more">Read more<i class="fa-solid fa-arrow-right"></i></div>  
+                                </div>
+                            </div>
+                        </a>
+                    }
+
+                    if (totalItems > itemsPerPage) 
+                    {
+                        <div class="pagination d-flex center" style="gap: 1rem;">
+
+                            @if (currentPage > 1)
+                            {
+                                <a href="?page=@(currentPage - 1)" class="change">PREV</a>
+                            }
+                            else
+                            {
+                                <span class="change inactive">PREV</span>
+                            }
+
+                            @for (int i = 1; i <= Math.Ceiling((decimal)totalItems / itemsPerPage); i++)
+                            {
+                                <div class="@((i == currentPage) ? "number active" : "number")">
+                                    <a href="?page=@i">@(i)</a>
+                                </div >
+                            }
+
+                            @if (currentPage < Math.Ceiling((decimal)totalItems / itemsPerPage))
+                            {
+                                <a href="?page=@(currentPage + 1)" class="change">NEXT</a>
+                            }
+                            else
+                            {
+                                <span class="change inactive">NEXT</span>
+                            }
+
+                        </div>
+                    }
+                    
+                }
+                
+            </div>
+            <div class="line"></div>
+            <aside>
+            @await Html.PartialAsync("static/aside-items/asideProjectTags")
+            @await Html.PartialAsync("static/aside-items/asideHelpForm")
+
+            </aside>
+            
+        </div>
+    </div>
+</section>
+
+@await Html.GetBlockGridHtmlAsync(Model, "pageBottomLayout")

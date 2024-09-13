@@ -1,0 +1,84 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var sectionLabel = Model?.Content.Value<string>("sectionLabel");
+    var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+}
+
+<section class="our-services background2">
+    <div class="w-full d-flex center container">
+        <div class="w-max box">
+            <div class="label capitalize">@sectionLabel</div>
+            <h2 class="w-half">@sectionTitle</h2>
+            <div class="card-box">
+                <a href="">
+                    <div class="card">
+                        <div class="card-title h5">Risk management</div>
+                        <div class="img-wrapper">
+                            <div class="img-wrapper">
+                            <img src="./img/cards/1.svg" alt="" class="card-img">
+                        </div>
+                        </div>
+                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="card">
+                        <div class="card-title h5">Risk management</div>
+                        <div class="img-wrapper">
+                            <div class="img-wrapper">
+                            <img src="./img/cards/1.svg" alt="" class="card-img">
+                        </div>
+                        </div>
+                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="card">
+                        <div class="card-title h5">Risk management</div>
+                        <div class="img-wrapper">
+                            <div class="img-wrapper">
+                            <img src="./img/cards/1.svg" alt="" class="card-img">
+                        </div>
+                        </div>
+                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="card">
+                        <div class="card-title h5">Risk management</div>
+                        <div class="img-wrapper">
+                            <div class="img-wrapper">
+                            <img src="./img/cards/1.svg" alt="" class="card-img">
+                        </div>
+                        </div>
+                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="card">
+                        <div class="card-title h5">Risk management</div>
+                        <div class="img-wrapper">
+                            <div class="img-wrapper">
+                            <img src="./img/cards/1.svg" alt="" class="card-img">
+                        </div>
+                        </div>
+                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="card">
+                        <div class="card-title h5">Risk management</div>
+                        <div class="img-wrapper">
+                            <div class="img-wrapper">
+                            <img src="./img/cards/1.svg" alt="" class="card-img">
+                        </div>
+                        </div>
+                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

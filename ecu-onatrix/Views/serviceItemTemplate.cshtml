@@ -1,0 +1,56 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model.Value("pageTitle") ?? null;
+    ViewBag.Motto = Model.Value("pageMotto") ?? null;
+
+    var pageContent = Model?.Value<string>("pageTitle");
+}
+
+@await Html.PartialAsync("static/pageTop")
+
+<section class="service-item">
+    <div class="w-full d-flex center container">
+        <div class="w-max box">
+            <aside>
+                @await Html.PartialAsync("static/aside-items/asideAbout")
+                @await Html.PartialAsync("static/aside-items/asideHelpForm")
+            </aside>
+
+            <div class="line"></div>
+
+            <div class="content">
+                @Model.Value("pageContent")
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="question">
+    <div class="w-full d-flex center container">
+        <div class="w-max box">
+            <form>
+                <fieldset>
+                    <legend class="h5">Have a question?</legend>
+                    <div class="input-box">
+                        <label for="name">
+                            <input type="text" name="name" id="name" placeholder="Name">
+                        </label>
+                        <label for="email">
+                            <input type="text" name="email" id="email" placeholder="Email">
+                        </label>
+                        
+                    </div>
+                    <label for="question">
+                        <textarea name="question" id="question" placeholder="Question" rows="6"></textarea>
+                    </label>
+                    <input type="submit" class="btn-theme">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>
+
+@await Html.GetBlockGridHtmlAsync(Model, "pageBottomLayout")

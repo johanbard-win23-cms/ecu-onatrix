@@ -1,12 +1,11 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
     var sectionLabel = Model?.Content.Value<string>("sectionLabel");
     var sectionTitle = Model?.Content.Value<string>("sectionTitle");
-    var expertRows = Model?.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("expertRows") ?? null;
+    var expertRows = Model?.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>>("expertRows") ?? null;
     
-    int counter = 0;
 }
 
 <section class="experts">
@@ -14,7 +13,12 @@
         <div class="w-max d-flex column center box">
             <div class="label capitalize">@sectionLabel</div>
             <h2 class="w-half">@sectionTitle</h2>
-            @Html.GetBlockListHtml(Model.Content.Value, "expertRows")
+            foreach (var row in expertRows)
+            {
+                @await Html.GetBlockGridHtmlAsync(row)
+            }
+            
+            @await Html.GetBlockGridItemAreasHtmlAsync(Model)
         </div>
     </div>
 </section>
