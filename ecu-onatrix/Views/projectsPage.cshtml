@@ -14,6 +14,15 @@
     .OrderBy(x => x.CreateDate);
 
     var currentTag = Context.Request.Query["tag"].ToString();
+    if (!String.IsNullOrEmpty(currentTag)) 
+    { 
+        selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))
+        .ChildrenOfType("projectItemTemplate")
+        .Where(x => x.IsVisible())
+        .Where(x => x.Value<IEnumerable<string>>("pageTags").Contains(currentTag))
+        .OrderBy(x => x.CreateDate);
+    }
+
 
     if (currentTag != null)
     {

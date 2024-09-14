@@ -13,13 +13,13 @@
     <div class="tags">
         @foreach (var item in selection) 
         {
-            @if (@item.Text.ToLower() == @currentTag)
+            @if (@item.Text == @currentTag)
             {
-                <a href="/projects?tag=@item.Text.ToLower()" class="btn-tag current">@item.Text</a>
+                <a href="/projects" class="btn-tag current">@item.Text</a>
             }
             else
             {
-                <a href="/projects?tag=@item.Text.ToLower()" class="btn-tag">@item.Text</a>
+                <a href="/projects?tag=@item.Text" class="btn-tag">@item.Text</a>
             }
             
         }
