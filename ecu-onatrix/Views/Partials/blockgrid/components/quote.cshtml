@@ -1,0 +1,11 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var quoteText = Model?.Content.Value<string>("quoteText");
+}
+
+<div class="u-quote d-flex">
+    <i class="fa-solid fa-quote-left"></i>
+    <div class="u-quote-text">@quoteText</div>
+</div>

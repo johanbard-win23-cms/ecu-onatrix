@@ -1,0 +1,17 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var buttonText = Model?.Content.Value<string>("buttonText");
+    var buttonUrl = Model?.Content.Value<string>("buttonTargetUrl");
+    var themeInverted = Model?.Content.Value<bool>("buttonThemeInverse");
+
+    string cssClass = "";
+
+    if (themeInverted == true)
+        cssClass += "u-btn-sub1";
+    else
+        cssClass += "u-btn-theme";
+}
+
+<a href="@buttonUrl" target="_blank" class="@cssClass">@buttonText</a>

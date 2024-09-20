@@ -1,0 +1,42 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    //var color = Model?.Content.Value("backgroundColor");
+    var colorLabel = Model?.Content.Value<Umbraco.Cms.Core.PropertyEditors.ValueConverters.ColorPickerValueConverter.PickedColor>("backgroundColor").Label.ToLower();
+    var paddingTop = Model?.Content.Value<bool>("paddingTop");
+    var paddingBottom = Model?.Content.Value<bool>("paddingBottom");
+
+    string cssClass = "";
+    switch(colorLabel) 
+    {
+    case "white (default)":
+        cssClass += "u-bg-white ";
+        break;
+    case "background-light":
+        cssClass += "u-bg-background ";
+        break;
+    case "background-dark":
+        cssClass += "u-bg-background2 ";
+        break;
+    case "main":
+        cssClass += "u-bg-main ";
+        break;
+    case "footer":
+        cssClass += "u-bg-footer ";
+        break;
+    default:
+        break;
+    }
+
+    if (paddingTop == true)
+        cssClass += "u-p-top ";
+    if (paddingBottom == true)
+        cssClass += "u-p-bottom";
+}
+
+<section class="u-section d-flex center @cssClass">
+    <div class="w-max">
+    @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+    </div>
+</section>

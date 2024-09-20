@@ -1,0 +1,38 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    //var color = Model?.Content.Value("backgroundColor");
+    var colorLabel = Model?.Content.Value<Umbraco.Cms.Core.PropertyEditors.ValueConverters.ColorPickerValueConverter.PickedColor>("backgroundColor").Label.ToLower();
+    var paddingAround = Model?.Content.Value<bool>("paddingAround");
+
+    string cssClass = "";
+    switch(colorLabel) 
+    {
+    case "white (default)":
+        cssClass += "u-bg-white ";
+        break;
+    case "background-light":
+        cssClass += "u-bg-background ";
+        break;
+    case "background-dark":
+        cssClass += "u-bg-background2 ";
+        break;
+    case "main":
+        cssClass += "u-bg-main ";
+        break;
+    case "footer":
+        cssClass += "u-bg-footer ";
+        break;
+    default:
+        break;
+    }
+
+    if (paddingAround == true)
+        cssClass += "u-p-all";
+    
+}
+
+<div class="u-container w-max @cssClass">
+    @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+</div>

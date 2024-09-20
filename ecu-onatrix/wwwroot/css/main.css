@@ -750,21 +750,43 @@ section.u-section.u-p-bottom {
 .u-container {
   width: 100%;
 }
-.u-container.u-p {
+.u-container.u-p-all {
   padding: 2rem;
 }
 
-section.u-section.u-bg-white, .u-container.u-bg-white {
+section.u-section.u-bg-white {
   background-color: #FFFFFF;
 }
-section.u-section.u-bg-background, .u-container.u-bg-background {
+section.u-section.u-bg-background {
   background-color: #e5e5e5;
 }
-section.u-section.u-bg-background2, .u-container.u-bg-background2 {
+section.u-section.u-bg-background2 {
   background-color: #f7f7f7;
 }
+section.u-section.u-bg-main {
+  background-color: #4F5955;
+}
+section.u-section.u-bg-footer {
+  background-color: #0e0e0e;
+}
 
-.u-btn-theme {
+.u-container.u-bg-white {
+  background-color: #FFFFFF;
+}
+.u-container.u-bg-background {
+  background-color: #e5e5e5;
+}
+.u-container.u-bg-background2 {
+  background-color: #f7f7f7;
+}
+.u-container.u-bg-main {
+  background-color: #4F5955;
+}
+.u-container.u-bg-footer {
+  background-color: #0e0e0e;
+}
+
+a.u-btn-theme {
   transition: all 0.3s ease-in-out;
   width: fit-content;
   border-radius: 3px;
@@ -781,13 +803,13 @@ section.u-section.u-bg-background2, .u-container.u-bg-background2 {
   color: #F2EDDC;
   border: none;
 }
-.u-btn-theme:hover {
+a.u-btn-theme:hover {
   text-decoration: none;
   background: #F2EDDC;
   color: #4F5955;
 }
 
-.u-btn-sub1 {
+a.u-btn-sub1 {
   transition: all 0.3s ease-in-out;
   width: fit-content;
   border-radius: 3px;
@@ -804,13 +826,14 @@ section.u-section.u-bg-background2, .u-container.u-bg-background2 {
   color: #4F5955;
   border: none;
 }
-.u-btn-sub1:hover {
+a.u-btn-sub1:hover {
   text-decoration: none;
   background: #4F5955;
   color: #F2EDDC;
 }
 
 .u-image {
+  height: 100%;
   width: 100%;
   object-fit: cover;
 }
@@ -871,6 +894,12 @@ section.u-section.u-bg-background2, .u-container.u-bg-background2 {
 }
 
 .u-quote {
+  gap: 0.5rem;
+}
+.u-quote i {
+  color: #D9C3A9;
+}
+.u-quote .u-quote-text {
   line-height: 1.6;
   font-weight: 400;
   font-size: 16px;
@@ -896,7 +925,7 @@ section.u-section.u-bg-background2, .u-container.u-bg-background2 {
   display: grid;
   grid-template-columns: repeat(var(--umb-block-grid--grid-columns, 1), minmax(0, 1fr));
   grid-auto-flow: row;
-  grid-auto-rows: minmax(50px, min-content);
+  grid-auto-rows: minmax(2rem, min-content);
   column-gap: var(--umb-block-grid--column-gap, 0);
   row-gap: var(--umb-block-grid--row-gap, 0);
 }
