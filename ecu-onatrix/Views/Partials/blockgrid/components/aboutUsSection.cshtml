@@ -24,29 +24,29 @@
                 </div>
             </div>
             <div class="w-half about-form">
-                <form>
+                <form onsubmit="handleSubmit(event)" novalidate>
                     <fieldset>
                         <legend class="h3">Request a call back</legend>
                         <div class="inputs">
                             <div class="italic">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat</div>
                             <label for="name">
                                 <input type="text" id="name" name="name" value="" placeholder="Name">
+                                <span></span>
                             </label>
                             <label for="email">
                                 <input type="text" id="email" name="email" value="" placeholder="Email address">
+                                <span></span>
                             </label>
                             <label for="phone">
                                 <input type="text" id="phone" name="phone" value="" placeholder="Phone">
-                            </label>
-                            <label for="phone">
-                                <input type="text" id="phone" name="phone" value="" placeholder="Phone">
+                                <span></span>
                             </label>
                             <label for="contact-target">
                                 <div class="select-box">
                                 <select name="contact-target" id="contact-target">
-                                    <option value="financial">Financial consulting</option>
-                                    <option value="export">Exports consulting</option>
-                                    <option value="emotion">Emotional consulting</option>
+                                    <option value="Financial consulting">Financial consulting</option>
+                                    <option value="Exports consulting">Exports consulting</option>
+                                    <option value="Emotional consulting">Emotional consulting</option>
                                 </select>
                                 <i class="fa-solid fa-chevron-down"></i>
                                 </div>
@@ -59,3 +59,5 @@
         </div>
     </div>
 </section>
+
+<script defer src="/scripts/forms.js"></script>

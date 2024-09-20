@@ -1,8 +1,8 @@
-﻿<form class="help-box">
+﻿<form onsubmit="handleSubmit(event)" novalidate class="help-box">
     <img src="/media/static-images/asideEnvelope.svg" alt="">
     <fieldset>
         <legend class="h5">How can we help?</legend>
-        <div class="text">online support 24/7, we are hete to help you</div>
+        <div class="text">Online support 24/7, we are here to help you</div>
         <label for="email">
             <div class="input-box">
                 <input type="text" class="email" name="email" id="email" placeholder="Email address">
@@ -11,3 +11,5 @@
         </label>
     </fieldset>
 </form>
+
+<script defer src="/scripts/forms.js"></script>

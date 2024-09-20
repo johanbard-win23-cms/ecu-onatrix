@@ -391,6 +391,11 @@ h6, .h6 {
   }
 }
 input, select, textarea {
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 16px;
+  color: #535656;
+  font-family: "Poppins", sans-serif;
   width: 100%;
   padding: 1rem;
   border: 1px solid #e5e5e5;
@@ -404,6 +409,13 @@ input::placeholder, textarea::placeholder {
 }
 input:focus::placeholder, textarea:focus::placeholder {
   opacity: 0;
+}
+input.error, textarea.error {
+  border-color: #EF4444;
+  box-shadow: -1px -1px 2px inset #EF4444;
+}
+input.shake, textarea.shake {
+  animation: horizontal-shaking 0.3s linear 1 alternate;
 }
 
 .select-box {
@@ -422,6 +434,23 @@ input:focus::placeholder, textarea:focus::placeholder {
   margin: auto 0;
 }
 
+@keyframes horizontal-shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 a {
   line-height: 1.6;
   font-weight: 400;

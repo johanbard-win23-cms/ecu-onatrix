@@ -13,7 +13,7 @@
         <div class="w-full map-overlay"><img src="/media/static-images/map.svg" alt="" class="map"></div>
         <div class="w-max d-flex column center box">
             <div class="label capitalize">@sectionLabel</div>
-            <form class="contact">
+            <form onsubmit="handleSubmit(event)" novalidate class="contact">
                 <fieldset class="d-flex column center">
                     <legend class="h2 w-half">@sectionTitle</legend>
                     <div class="text italic w-half">@sectionText</div>
@@ -21,14 +21,17 @@
                         <div class="input-box">
                             <label for="name">
                                 <input type="text" id="name" name="name" value="" placeholder="Name">
+                                <span></span>
                             </label>
                             <label for="email">
                                 <input type="text" id="email" name="email" value="" placeholder="Email address">
+                                <span></span>
                             </label>
                         </div>
                         <div class="input-box">
                             <label for="phone">
                                 <input type="text" id="phone" name="phone" value="" placeholder="Phone">
+                                <span></span>
                             </label>
                             <label for="contact-target">
                                 <div class="select-box">
@@ -48,3 +51,5 @@
         </div>
     </div>
 </section>
+
+<script defer src="/scripts/forms.js"></script>
