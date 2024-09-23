@@ -1,4 +1,23 @@
-﻿<form onsubmit="handleSubmit(event)" novalidate class="help-box">
+﻿@{
+    bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
+}
+
+@using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
+{
+    <div class="help-box">
+        <img src="/media/static-images/asideEnvelope.svg" alt="">
+        <div>
+            <div class="h5">How can we help?</div>
+            <div class="text">Online support 24/7, we are here to help you</div>
+            <label for="email" class="input-box">
+                <input type="text" class="email @((error_email) ? "error shake" : null)" name="email" id="email" placeholder="Email address" value=@ViewData["email"]>
+                <button type="submit"><i class="fa-solid fa-envelope"></i></button>
+            </label>
+        </div>
+    </div>
+}
+
+@* <form onsubmit="handleSubmit(event)" novalidate class="help-box">
     <img src="/media/static-images/asideEnvelope.svg" alt="">
     <fieldset>
         <legend class="h5">How can we help?</legend>
@@ -10,6 +29,6 @@
             </div>
         </label>
     </fieldset>
-</form>
+</form> *@
 
 <script defer src="/scripts/forms.js"></script>

@@ -108,28 +108,52 @@ function error(inp, add) {
     }
 }
 
-// SEND
-const apiUrl = "https://jb-onatrix-contactprovider.azurewebsites.net/api/CreateContactRequest?code=qHTqm6obHf3IzdHKj1xKHN2KJfYnNdFJKDGVU-Qszw2sAzFuMVXQ3Q%3D%3D"
+// SEND TO API
+//const apiUrl = "https://jb-onatrix-contactprovider.azurewebsites.net/api/CreateContactRequest?code=qHTqm6obHf3IzdHKj1xKHN2KJfYnNdFJKDGVU-Qszw2sAzFuMVXQ3Q%3D%3D"
 
-async function post(contactObj) {
-    const contactJson = JSON.stringify(contactObj)
-    
-    try {
-        const result = await fetch(`${apiUrl}`, {
-            method: "post",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: contactJson
-        })
-        if (result.ok) {
-            console.log(`${result.status} : ${result.statusText}`)
-            location.reload()
-        }
-        else
-            console.log(`ERROR : ${result.status} : ${result.statusText}`)
-    }
-    catch(err) {
-        console.log(err)
-    }
-}
+//async function post(contactObj) {
+//    const contactJson = JSON.stringify(contactObj)
+
+//    try {
+//        const result = await fetch(`${apiUrl}`, {
+//            method: "post",
+//            headers: {
+//                "Content-type": "application/json"
+//            },
+//            body: contactJson
+//        })
+//        if (result.ok) {
+//            console.log(`${result.status} : ${result.statusText}`)
+//            location.reload()
+//        }
+//        else
+//            console.log(`ERROR : ${result.status} : ${result.statusText}`)
+//    }
+//    catch(err) {
+//        console.log('ERROR : ', err)
+//    }
+//}
+
+// SEND TO SURFACE CONTROLLER
+//const apiUrl = "/umbraco/surface/contactsurface/handlejsonsubmit"
+//function post(contactObj) {
+//    const contactJson = JSON.stringify(contactObj)
+
+//    console.log(contactJson)
+
+
+//    fetch(`${apiUrl}`, {
+//        method: 'POST',
+//        headers: {
+//            "Content-type": 'application/json'
+//        },
+//        body: contactJson
+//    })
+//    .then(response => response.json())
+//    .then(data => {
+//        console.log('Success:', data);
+//    })
+//    .catch((err) => {
+//        console.log('Error:', err);
+//    });
+//}
