@@ -1,3 +1,22 @@
+// USING FORMS
+// ADD @Html.AntiForgeryToken() ON PAGE
+// ADD class="form" TO <form>
+// ADD  @if (TempData["success"] == null)
+//      {
+//          FORM INPUTS
+//      }
+//      else
+//      {
+//          if ((bool)TempData["success"]!)
+//          {
+//              <div class="text status-message shake">@TempData["status_message"]</div>
+//          }
+//          else
+//          {
+//              <div class="text status-message shake error">@TempData["status_message"]</div>
+//          }
+//      }
+
 // VARIABLES
 const errorMessages = {
     name: 'Must be at least one character',
@@ -91,6 +110,12 @@ function validationSwitch(inp) {
             const emailRegex = /(([^<>()\[\]\\.,:\s@"]+(\.[^<>()\[\]\\.,:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/
             error(inp, !emailRegex.test(inp.value))
             break
+
+        case 'phone':
+            const phoneRegex = /((^[\+]?[0-9 -]{5,20}$))/
+            error(inp, !phoneRegex.test(inp.value))
+            break
+
         default:
           break
       }
