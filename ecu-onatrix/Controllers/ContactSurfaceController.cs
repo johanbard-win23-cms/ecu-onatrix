@@ -1,7 +1,6 @@
 ﻿using ecu_onatrix.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Text;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
@@ -17,6 +16,15 @@ namespace ecu_onatrix.Controllers
     {
         private readonly HttpClient _httpClient = httpClient;
 
+        /// <summary>
+        /// NOT IN USE
+        /// Takes json object from umbracoPage and sends object to contactProvider
+        /// </summary>
+        /// <param name="contactRequest"></param>
+        /// <returns>
+        /// Page reload
+        /// ** Stores information in TempData["success"](bool) and TempData["status_message"](string)
+        /// </returns>
         [HttpPost]
         public async Task<IActionResult> HandleSubmit(ContactRequestModel contactRequest)
         {
@@ -52,6 +60,14 @@ namespace ecu_onatrix.Controllers
             return RedirectToCurrentUmbracoPage();
         }
 
+        /// <summary>
+        /// Takes json object from js and sends object to contactProvider 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>
+        /// JsonResult {success(bool), message(string), recieved data(ContactRequestModel)}
+        /// ** Stores information in TempData["success"](bool) and TempData["status_message"](string)
+        /// </returns>
         [HttpPost]
         public async Task<JsonResult>  HandleJsonSubmit([FromBody] ContactRequestModel model)
         {
