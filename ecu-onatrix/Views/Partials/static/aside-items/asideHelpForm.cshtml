@@ -2,7 +2,7 @@
     bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
 }
 
-@using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
+@* @using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
 {
     <div class="help-box">
         <img src="/media/static-images/asideEnvelope.svg" alt="">
@@ -15,20 +15,38 @@
             </label>
         </div>
     </div>
-}
+} *@
 
-@* <form onsubmit="handleSubmit(event)" novalidate class="help-box">
+@Html.AntiForgeryToken()
+
+<form class="help-box form" novalidate class="help-box">
     <img src="/media/static-images/asideEnvelope.svg" alt="">
     <fieldset>
         <legend class="h5">How can we help?</legend>
         <div class="text">Online support 24/7, we are here to help you</div>
-        <label for="email">
-            <div class="input-box">
-                <input type="text" class="email" name="email" id="email" placeholder="Email address">
-                <button type="submit"><i class="fa-solid fa-envelope"></i></button>
-            </div>
-        </label>
+        
+        @if (TempData["success"] == null)
+        {
+            <label for="email">
+                <div class="input-box">
+                    <input type="text" class="email" name="email" id="email" placeholder="Email address">
+                    <button type="submit"><i class="fa-solid fa-envelope"></i></button>
+                </div>
+            </label>
+        }
+        else
+        {
+            if ((bool)TempData["success"]!)
+            {
+                <div class="text status-message shake">@TempData["status_message"]</div>
+            }
+            else
+            {
+                <div class="text status-message shake error">@TempData["status_message"]</div>
+            }
+        }
+        
     </fieldset>
-</form> *@
+</form>
 
 <script defer src="/scripts/forms.js"></script>

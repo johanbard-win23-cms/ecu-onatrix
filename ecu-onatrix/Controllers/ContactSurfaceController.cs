@@ -37,18 +37,36 @@ namespace ecu_onatrix.Controllers
             var content = new StringContent(JsonConvert.SerializeObject(contactRequest), Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("https://jb-onatrix-contactprovider.azurewebsites.net/api/CreateContactRequest?code=qHTqm6obHf3IzdHKj1xKHN2KJfYnNdFJKDGVU-Qszw2sAzFuMVXQ3Q%3D%3D", content);
             if (response.IsSuccessStatusCode)
-                TempData["status_message"] = "You are now subscribed!";
+            {
+                TempData["success"] = true;
+                TempData["status_message"] = "\"Thank you! We will contact you soon.";
+            }
+                
             else
-                TempData["status_message"] = "Error - Something went wrong while attempting to subscribe!";
+            {
+                TempData["success"] = false;
+                TempData["status_message"] = "Error - Something went wrong while attempting to contact us!";
+            }
+                
 
             return RedirectToCurrentUmbracoPage();
         }
 
         [HttpPost]
-        public JsonResult HandleJsonSubmit([FromBody] ContactRequestModel model)
+        public async Task<JsonResult>  HandleJsonSubmit([FromBody] ContactRequestModel model)
         {
+            var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("https://jb-onatrix-contactprovider.azurewebsites.net/api/CreateContactRequest?code=qHTqm6obHf3IzdHKj1xKHN2KJfYnNdFJKDGVU-Qszw2sAzFuMVXQ3Q%3D%3D", content);
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["success"] = true;
+                TempData["status_message"] = "Thank you! We will contact you soon.";
+                return Json(new { success = true, message = "Data received and registered", receivedData = model });
+            }
 
-            return Json(new { success = true, message = "Data received", receivedData = model });
+            TempData["success"] = false;
+            TempData["status_message"] = "Error - Something went wrong while attempting to contact us!";
+            return Json(new { success = false, message = "Data received but registration failed", receivedData = model });
 
         }
     }

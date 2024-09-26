@@ -17,6 +17,8 @@ const formInputs = {
     phone: document.querySelector('#phone'),
 }
 
+const forms = document.getElementsByClassName("form")
+
 var errorArray = []
 
 // EVENT LISTENERS
@@ -29,6 +31,11 @@ document.querySelector('body').addEventListener('mousedown', (e) => {
     }
 })
 
+for (form of forms) {
+    form.addEventListener('submit', handleSubmit)
+}
+
+// HANDLE SUBMIT
 function handleSubmit(e) {
     e.preventDefault()
     
@@ -108,7 +115,7 @@ function error(inp, add) {
     }
 }
 
-// SEND TO API
+// SEND DIRECTLY TO API
 //const apiUrl = "https://jb-onatrix-contactprovider.azurewebsites.net/api/CreateContactRequest?code=qHTqm6obHf3IzdHKj1xKHN2KJfYnNdFJKDGVU-Qszw2sAzFuMVXQ3Q%3D%3D"
 
 //async function post(contactObj) {
@@ -134,26 +141,31 @@ function error(inp, add) {
 //    }
 //}
 
-// SEND TO SURFACE CONTROLLER
-//const apiUrl = "/umbraco/surface/contactsurface/handlejsonsubmit"
-//function post(contactObj) {
-//    const contactJson = JSON.stringify(contactObj)
+// SEND TO SURFACE CONTROLLER WITH VERTOKEN
+const apiUrl = '/umbraco/surface/contactsurface/handlejsonsubmit'
+function post(contactObj) {
+    const contactJson = JSON.stringify(contactObj)
 
-//    console.log(contactJson)
-
-
-//    fetch(`${apiUrl}`, {
-//        method: 'POST',
-//        headers: {
-//            "Content-type": 'application/json'
-//        },
-//        body: contactJson
-//    })
-//    .then(response => response.json())
-//    .then(data => {
-//        console.log('Success:', data);
-//    })
-//    .catch((err) => {
-//        console.log('Error:', err);
-//    });
-//}
+    fetch(`${apiUrl}`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'RequestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+        },
+        body: contactJson
+    })
+    .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Success:', data.message)
+                location.reload()
+            }
+            else {
+                console.error('Error:', data.message)
+            }
+        
+    })
+    .catch((err) => {
+        console.log('Error:', err);
+    });
+}

@@ -10,6 +10,8 @@
     var sectionSignatureText = Model?.Content.Value<string>("sectionSignatureText");
 }
 
+@Html.AntiForgeryToken()
+
 <section class="about-us">
     <div class="w-full d-flex center container">
         <div class="w-max box">
@@ -24,7 +26,7 @@
                 </div>
             </div>
             <div class="w-half about-form">
-                <form onsubmit="handleSubmit(event)" novalidate>
+                <form class="form" novalidate>
                     <fieldset>
                         <legend class="h3">Request a call back</legend>
                         <div class="inputs">
