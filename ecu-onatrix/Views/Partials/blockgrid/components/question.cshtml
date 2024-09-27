@@ -1,0 +1,43 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@Html.AntiForgeryToken()
+
+<section class="question">
+    <div class="w-full d-flex center container">
+        <div class="w-max box">
+            <form class="form">
+                <fieldset>
+                    <legend class="h5">Have a question?</legend>
+                    @if (TempData["success"] == null)
+                    {
+                        <div class="input-box">
+                            <label for="name">
+                                <input type="text" name="name" id="name" placeholder="Name" required>
+                            </label>
+                            <label for="email">
+                                <input type="text" name="email" id="email" placeholder="Email" required>
+                            </label>
+                        </div>
+                        <label for="question">
+                            <textarea name="question" id="question" placeholder="Question" rows="6" required></textarea>
+                        </label>
+                        <input type="submit" class="btn-theme">
+                    }
+                    else
+                    {
+                        if ((bool)TempData["success"]!)
+                        {
+                            <div class="text status-message shake">@TempData["status_message"]</div>
+                        }
+                        else
+                        {
+                            <div class="text status-message shake error">@TempData["status_message"]</div>
+                        }
+                    }
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>

@@ -22,18 +22,21 @@ const errorMessages = {
     name: 'Must be at least one character',
     email: 'Must be a valid email address',
     phone: 'Must be a valid phone number',
+    question: 'Must be at least one character'
 }
 
 const defaultMessages = {
     name: '',
     email: '',
     phone: '',
+    question: ''
 }
 
 const formInputs = {
     name: document.querySelector('#name'),
     email: document.querySelector('#email'),
     phone: document.querySelector('#phone'),
+    question: document.querySelector('#question'),
 }
 
 const forms = document.getElementsByClassName("form")
@@ -80,9 +83,18 @@ function handleSubmit(e) {
                 category: document.querySelector('#contact-target').value
             }
         }
+        else if (document.querySelector('#name') != null && document.querySelector('#question') != null) {
+            formValues = {
+                name: document.querySelector('#name').value,
+                email: document.querySelector('#email').value,
+                category: 'general question',
+                question: document.querySelector('#question').value
+            }
+        }
         else {
             formValues = {
-                email: document.querySelector('#email').value
+                email: document.querySelector('#email').value,
+                category: 'general question'
             }
         }
         post(formValues)

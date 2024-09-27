@@ -34,10 +34,12 @@ namespace ecu_onatrix.Controllers
                 ViewData["email"] = contactRequest.Email;
                 ViewData["phone"] = contactRequest.Phone;
                 ViewData["category"] = contactRequest.Category;
+                ViewData["category"] = contactRequest.Question;
 
                 ViewData["error_name"] = string.IsNullOrEmpty(contactRequest.Name);
                 ViewData["error_email"] = string.IsNullOrEmpty(contactRequest.Email);
                 ViewData["error_phone"] = string.IsNullOrEmpty(contactRequest.Phone);
+                ViewData["error_category"] = string.IsNullOrEmpty(contactRequest.Category);
 
                 return CurrentUmbracoPage();
             }
