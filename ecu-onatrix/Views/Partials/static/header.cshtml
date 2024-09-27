@@ -34,12 +34,14 @@
                     <a href="@xUrl" class="btn-social"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="@linkedInUrl" class="btn-social"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
+                <div id="nav-btn" class="nav-btn"><i class="fa-solid fa-bars"></i></div>
             </div>    
         </div>
-        <div class="w-full d-flex center bottom">
+        <div id="nav-bar" class="w-full d-flex center bottom">
             <div class="content-box w-max d-flex center space-between">
-                <a href="/home"><img src="@siteLogoUrl" alt="Logo" class="logo"></a>
+                <a href="/" class="logo-wrapper"><img src="@siteLogoUrl" alt="Logo" class="logo"></a>
                 <nav>
+                    <a id="nav-home" href="/" class="nav-item">Home</a>
                     @if (selection?.Length > 0)
                     {
                         @foreach (var item in selection)

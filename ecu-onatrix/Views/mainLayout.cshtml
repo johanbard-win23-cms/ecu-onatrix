@@ -32,15 +32,16 @@
 
 </head>
 <body>
+    <div class="body-wrapper">
+        @await Html.PartialAsync("static/header")
+        
+        <main>
+            @RenderBody()
+        </main>
 
-    @await Html.PartialAsync("static/header")
-	
-	<main>
-		@RenderBody()
-	</main>
+        @await Html.PartialAsync("static/footer")
 
-	 @await Html.PartialAsync("static/footer")
-
-    <script src="/scripts/main.js"></script>
+        <script src="/scripts/main.js"></script>
+    </div>
 </body>
 </html>
