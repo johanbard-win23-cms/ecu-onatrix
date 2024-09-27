@@ -87,14 +87,14 @@ function handleSubmit(e) {
             formValues = {
                 name: document.querySelector('#name').value,
                 email: document.querySelector('#email').value,
-                category: 'general question',
+                category: 'General question',
                 question: document.querySelector('#question').value
             }
         }
         else {
             formValues = {
                 email: document.querySelector('#email').value,
-                category: 'general question'
+                category: 'General question'
             }
         }
         post(formValues)

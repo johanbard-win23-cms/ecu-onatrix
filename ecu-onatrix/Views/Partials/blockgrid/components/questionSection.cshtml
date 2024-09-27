@@ -7,7 +7,7 @@
 <section class="question">
     <div class="w-full d-flex center container">
         <div class="w-max box">
-            <form class="form">
+            <form class="form" novalidate>
                 <fieldset>
                     <legend class="h5">Have a question?</legend>
                     @if (TempData["success"] == null)
@@ -15,13 +15,16 @@
                         <div class="input-box">
                             <label for="name">
                                 <input type="text" name="name" id="name" placeholder="Name" required>
+                                <span></span>
                             </label>
                             <label for="email">
                                 <input type="text" name="email" id="email" placeholder="Email" required>
+                                <span></span>
                             </label>
                         </div>
                         <label for="question">
                             <textarea name="question" id="question" placeholder="Question" rows="6" required></textarea>
+                            <span></span>
                         </label>
                         <input type="submit" class="btn-theme">
                     }
@@ -41,3 +44,5 @@
         </div>
     </div>
 </section>
+
+<script defer src="/scripts/forms.js"></script>
