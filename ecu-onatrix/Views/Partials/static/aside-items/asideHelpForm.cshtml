@@ -17,36 +17,39 @@
     </div>
 } *@
 
-@Html.AntiForgeryToken()
-
-<form class="help-box form" novalidate class="help-box">
+<div class="help-box">
     <img src="/media/static-images/asideEnvelope.svg" alt="">
-    <fieldset>
-        <legend class="h5">How can we help?</legend>
+    <div class="fieldset">
+        <div class="h5 legend">How can we help?</div>
         <div class="text">Online support 24/7, we are here to help you</div>
         
-        @if (TempData["success"] == null)
+        @using (Html.BeginUmbracoForm("HandleAsideSubmit", "ContactSurface", FormMethod.Post))
         {
-            <label for="email">
+            <div class="label">
                 <div class="input-box">
-                    <input type="text" class="email" name="email" id="email" placeholder="Email address">
+                    @if (ViewData["error_email"] != null)
+                    {
+                        <input type="text" class="email @((bool)ViewData["error_email"]! ? "error shake" : null)" name="emailaside" id="emailaside" placeholder="Email address" value="@TempData["email"]">
+                    }
+                    else
+                    {
+                        <input type="text" class="email" name="emailaside" id="emailaside" placeholder="Email address">
+                    }
                     <button type="submit"><i class="fa-solid fa-envelope"></i></button>
                 </div>
-            </label>
-        }
-        else
-        {
-            if ((bool)TempData["success"]!)
+            </div>
+            
+            if (TempData["success"] != null)
             {
-                <div class="text status-message shake">@TempData["status_message"]</div>
-            }
-            else
-            {
-                <div class="text status-message shake error">@TempData["status_message"]</div>
+                if ((bool)TempData["success"]!)
+                {
+                    <div class="text status-message shake">@TempData["status_message"]</div>
+                }
+                else
+                {
+                    <div class="text status-message shake error">@TempData["status_message"]</div>
+                }
             }
         }
-        
-    </fieldset>
-</form>
-
-<script defer src="/scripts/forms.js"></script>
+    </div>
+</div>

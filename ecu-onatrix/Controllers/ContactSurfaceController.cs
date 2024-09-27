@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using System.Text.RegularExpressions;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
@@ -17,7 +18,6 @@ namespace ecu_onatrix.Controllers
         private readonly HttpClient _httpClient = httpClient;
 
         /// <summary>
-        /// NOT IN USE
         /// Takes json object from umbracoPage and sends object to contactProvider
         /// </summary>
         /// <param name="contactRequest"></param>
@@ -34,12 +34,13 @@ namespace ecu_onatrix.Controllers
                 ViewData["email"] = contactRequest.Email;
                 ViewData["phone"] = contactRequest.Phone;
                 ViewData["category"] = contactRequest.Category;
-                ViewData["category"] = contactRequest.Question;
+                ViewData["question"] = contactRequest.Question;
 
                 ViewData["error_name"] = string.IsNullOrEmpty(contactRequest.Name);
                 ViewData["error_email"] = string.IsNullOrEmpty(contactRequest.Email);
                 ViewData["error_phone"] = string.IsNullOrEmpty(contactRequest.Phone);
                 ViewData["error_category"] = string.IsNullOrEmpty(contactRequest.Category);
+                ViewData["error_question"] = string.IsNullOrEmpty(contactRequest.Question);
 
                 return CurrentUmbracoPage();
             }
@@ -58,6 +59,55 @@ namespace ecu_onatrix.Controllers
                 TempData["status_message"] = "Error - Something went wrong while attempting to contact us!";
             }
                 
+            return RedirectToCurrentUmbracoPage();
+        }
+
+        /// <summary>
+        /// Takes json object from umbracoPage and sends object to contactProvider
+        /// </summary>
+        /// <param name="contactRequest"></param>
+        /// <returns>
+        /// Page reload
+        /// ** Stores information in TempData["success"](bool) and TempData["status_message"](string)
+        /// </returns>
+        [HttpPost]
+        public async Task<IActionResult> HandleAsideSubmit(AsideHelpFormModel form)
+        {
+            const string pattern = @"[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+";
+            Regex rg = new Regex(pattern, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+
+            if (!ModelState.IsValid || !rg.IsMatch(form.Emailaside))
+            {
+                TempData["email"] = form.Emailaside;
+
+                ViewData["error_email"] = true;
+
+                return CurrentUmbracoPage();
+            }
+
+            ContactRequestModel model = new ContactRequestModel
+            {
+                Name = null!, 
+                Email = form.Emailaside,
+                Phone = null!,
+                Category = "Help request",
+                Question = null!
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("https://jb-onatrix-contactprovider.azurewebsites.net/api/CreateContactRequest?code=qHTqm6obHf3IzdHKj1xKHN2KJfYnNdFJKDGVU-Qszw2sAzFuMVXQ3Q%3D%3D", content);
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["success"] = true;
+                TempData["status_message"] = "Thank you! We will contact you soon.";
+            }
+
+            else
+            {
+                TempData["success"] = false;
+                TempData["status_message"] = "Error - Something went wrong while attempting to contact us!";
+            }
+
 
             return RedirectToCurrentUmbracoPage();
         }
