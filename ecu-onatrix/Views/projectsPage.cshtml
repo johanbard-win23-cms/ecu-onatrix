@@ -4,30 +4,35 @@
 @using Umbraco.Cms.Core.PublishedCache;
 @inject ITagQuery TagQuery;
 @{
-	Layout = "mainLayout.cshtml";
+
+    Layout = "mainLayout.cshtml";
     ViewBag.Title = Model.Value("pageTitle") ?? null;
     ViewBag.Motto = Model.Value("pageMotto") ?? null;
 
-    var selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))
-    .ChildrenOfType("projectItemTemplate")
-    .Where(x => x.IsVisible())
-    .OrderBy(x => x.CreateDate);
+    IOrderedEnumerable<IPublishedContent> selection = null!;
 
     var currentTag = Context.Request.Query["tag"].ToString();
     if (!String.IsNullOrEmpty(currentTag)) 
     { 
-        selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))
-        .ChildrenOfType("projectItemTemplate")
+        selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))!
+        .ChildrenOfType("projectItemTemplate")!
         .Where(x => x.IsVisible())
-        .Where(x => x.Value<IEnumerable<string>>("pageTags").Contains(currentTag))
+        .Where(x => x.Value<IEnumerable<string>>("pageTags")!.Contains(currentTag))
         .OrderBy(x => x.CreateDate);
     }
 
-
-    if (currentTag != null)
+    if (String.IsNullOrEmpty(currentTag) || selection == null)
     {
-       // selection = TagQuery.GetContentByTag(currentTag);
+        selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))!
+        .ChildrenOfType("projectItemTemplate")!
+        .Where(x => x.IsVisible())
+        .OrderBy(x => x.CreateDate);
     }
+
+    // if (currentTag != null)
+    // {
+    //    selection = TagQuery.GetContentByTag(currentTag);
+    // }
 
     var itemsPerPage = 6;
 

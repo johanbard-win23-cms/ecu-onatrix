@@ -4,6 +4,14 @@
 @{
     var sectionLabel = Model?.Content.Value<string>("sectionLabel");
     var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+
+    var shownItems = 6;
+
+    var selection = Umbraco.Content(Guid.Parse("82826748-87e0-4e6f-be29-0e5ff8d858be"))
+    .ChildrenOfType("serviceItemTemplate")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.CreateDate)
+    .Take(shownItems);
 }
 
 <section class="our-services background2">
@@ -12,72 +20,24 @@
             <div class="label uppercase">@sectionLabel</div>
             <h2 class="w-half">@sectionTitle</h2>
             <div class="card-box">
-                <a href="">
-                    <div class="card">
-                        <div class="card-title h5">Risk management</div>
-                        <div class="img-wrapper">
-                            <div class="img-wrapper">
-                            <img src="./img/cards/1.svg" alt="" class="card-img">
-                        </div>
-                        </div>
-                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="card">
-                        <div class="card-title h5">Risk management</div>
-                        <div class="img-wrapper">
-                            <div class="img-wrapper">
-                            <img src="./img/cards/1.svg" alt="" class="card-img">
-                        </div>
-                        </div>
-                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="card">
-                        <div class="card-title h5">Risk management</div>
-                        <div class="img-wrapper">
-                            <div class="img-wrapper">
-                            <img src="./img/cards/1.svg" alt="" class="card-img">
-                        </div>
-                        </div>
-                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="card">
-                        <div class="card-title h5">Risk management</div>
-                        <div class="img-wrapper">
-                            <div class="img-wrapper">
-                            <img src="./img/cards/1.svg" alt="" class="card-img">
-                        </div>
-                        </div>
-                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="card">
-                        <div class="card-title h5">Risk management</div>
-                        <div class="img-wrapper">
-                            <div class="img-wrapper">
-                            <img src="./img/cards/1.svg" alt="" class="card-img">
-                        </div>
-                        </div>
-                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="card">
-                        <div class="card-title h5">Risk management</div>
-                        <div class="img-wrapper">
-                            <div class="img-wrapper">
-                            <img src="./img/cards/1.svg" alt="" class="card-img">
-                        </div>
-                        </div>
-                        <p class="card-text">Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
-                    </div>
-                </a>
+                @if (selection != null)
+                {
+                    @foreach (var item in selection) 
+                    {
+                        var thumbnailImage = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                        var preamble = item?.Value<string>("preamble") ?? "";
+                            
+                        <a href="@item.Url()">
+                            <div class="card">
+                                <div class="card-title h5">@item.Name</div>
+                                <div class="img-wrapper">
+                                    <img src="@thumbnailImage" alt="@item.Name" class="card-img">
+                                </div>
+                                <p class="card-text">@preamble</p>
+                            </div>
+                        </a>
+                    }
+                }
             </div>
         </div>
     </div>

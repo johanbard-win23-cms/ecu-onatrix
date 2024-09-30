@@ -4,6 +4,19 @@
 @{
     var sectionLabel = Model?.Content.Value<string>("sectionLabel");
     var sectionTitle = Model?.Content.Value<string>("sectionTitle");
+
+    var selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))!
+    .ChildrenOfType("projectItemTemplate")!
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.CreateDate);
+
+    var itemsPerPage = 4;
+
+    if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
+        currentPage = 1;
+
+    var totalItems = selection?.Count() ?? 0;
+    var pagedItems = selection.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
 }
 
 <section class="our-projects">
@@ -14,46 +27,60 @@
                 <h2>@sectionTitle</h2>
             </div>
             <div class="carousel w-full">
-                <a href="">
-                    <div class="card">
-                        <img src="./img/carousel.svg" alt="" class="card-img">
-                        <div class="bottom">
-                            <div class="card-heading subt-1">Business Insights for SP Group Inc.</div>
-                            <div class="card-text">Financial Services</div>
-                            <i class="fa-solid fa-chevron-right"></i>
+                 @if (pagedItems != null)
+                {
+                    @foreach (var item in pagedItems) 
+                    {
+                        var title = item?.Value<string>("pageTitle") ?? "";
+                        <!-- if (!string.IsNullOrEmpty(title) && title.Length > 30) { title = title?[0..Math.Min(title.Length, 30)] + "...";} -->
+                        var category = item?.Value<string>("pageCategory") ?? "";
+                        var thumbnailImage = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+
+                        <a href="@item.Url()">
+                            <div class="card">
+                                <img src="@thumbnailImage" alt="@title" class="card-img">
+                                <div class="bottom">
+                                    <div class="card-heading subt-1">@title</div>
+                                    <div class="card-text">@category</div>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </a>
+                    }
+
+                    if (totalItems > itemsPerPage) 
+                    {
+                        <div class="pagination d-flex center" style="gap: 1rem;">
+
+                            @if (currentPage > 1)
+                            {
+                                <a href="?page=@(currentPage - 1)" class="change">PREV</a>
+                            }
+                            else
+                            {
+                                <span class="change inactive">PREV</span>
+                            }
+
+                            @for (int i = 1; i <= Math.Ceiling((decimal)totalItems / itemsPerPage); i++)
+                            {
+                                <div class="@((i == currentPage) ? "number active" : "number")">
+                                    <a href="?page=@i">@(i)</a>
+                                </div >
+                            }
+
+                            @if (currentPage < Math.Ceiling((decimal)totalItems / itemsPerPage))
+                            {
+                                <a href="?page=@(currentPage + 1)" class="change">NEXT</a>
+                            }
+                            else
+                            {
+                                <span class="change inactive">NEXT</span>
+                            }
+
                         </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="card">
-                        <img src="./img/carousel.svg" alt="" class="card-img">
-                        <div class="bottom">
-                            <div class="card-heading subt-1">Business Insights for SP Group Inc.</div>
-                            <div class="card-text">Financial Services</div>
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="card">
-                        <img src="./img/carousel.svg" alt="" class="card-img">
-                        <div class="bottom">
-                            <div class="card-heading subt-1">Business Insights for SP Group Inc.</div>
-                            <div class="card-text">Financial Services</div>
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="card">
-                        <img src="./img/carousel.svg" alt="" class="card-img">
-                        <div class="bottom">
-                            <div class="card-heading subt-1">Business Insights for SP Group Inc.</div>
-                            <div class="card-text">Financial Services</div>
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </div>
-                    </div>
-                </a>
+                    }
+                    
+                }
             </div>
         </div>
     </div>
