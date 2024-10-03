@@ -1287,33 +1287,46 @@ section.page-top {
     section.page-top .container {
         position: relative;
         padding: 4rem 0;
+        overflow: hidden;
     }
 
         section.page-top .container .bg-img-left {
-            position: absolute;
-            padding-top: 3rem;
-            left: 0;
-            top: 0;
             display: none;
         }
 
 @media (min-width: 768px) {
     section.page-top .container .bg-img-left {
         display: block;
+        position: absolute;
+        padding-top: 3rem;
+        left: -15rem;
+        bottom: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    section.page-top .container .bg-img-left {
+        left: 0;
     }
 }
 
 section.page-top .container .bg-img-right {
-    position: absolute;
-    padding-bottom: 1.5rem;
-    right: 0;
-    bottom: 0;
     display: none;
 }
 
 @media (min-width: 768px) {
     section.page-top .container .bg-img-right {
         display: block;
+        position: absolute;
+        padding-bottom: 1.5rem;
+        right: -15rem;
+        top: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    section.page-top .container .bg-img-right {
+        right: -7.5rem;
     }
 }
 
