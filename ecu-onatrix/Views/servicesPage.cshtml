@@ -12,7 +12,7 @@
     .Where(x => x.IsVisible())
     .OrderBy(x => x.CreateDate);
 
-    var itemsPerPage = 1;
+    var itemsPerPage = 6;
 
     if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
         currentPage = 1;

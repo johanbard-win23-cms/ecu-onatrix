@@ -2,14 +2,15 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @using Umbraco.Cms.Core.PublishedCache;
-@inject ITagQuery TagQuery;
+@* @inject ITagQuery TagQuery; *@
 @{
 
     Layout = "mainLayout.cshtml";
     ViewBag.Title = Model.Value("pageTitle") ?? null;
     ViewBag.Motto = Model.Value("pageMotto") ?? null;
 
-    IOrderedEnumerable<IPublishedContent> selection = null!;
+    //IOrderedEnumerable<IPublishedContent> selection = null!;
+    IEnumerable<IPublishedContent> selection = null!;
 
     var currentTag = Context.Request.Query["tag"].ToString();
     if (!String.IsNullOrEmpty(currentTag)) 
@@ -17,16 +18,16 @@
         selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))!
         .ChildrenOfType("projectItemTemplate")!
         .Where(x => x.IsVisible())
-        .Where(x => x.Value<IEnumerable<string>>("pageTags")!.Contains(currentTag))
-        .OrderBy(x => x.CreateDate);
+        .Where(x => x.Value<IEnumerable<string>>("pageTags")!.Contains(currentTag));
+        //.OrderBy(x => x.CreateDate);
     }
 
     if (String.IsNullOrEmpty(currentTag) || selection == null)
     {
         selection = Umbraco.Content(Guid.Parse("97f83b66-cdcc-4782-b07c-d378e1adbd38"))!
         .ChildrenOfType("projectItemTemplate")!
-        .Where(x => x.IsVisible())
-        .OrderBy(x => x.CreateDate);
+        .Where(x => x.IsVisible());
+        //.OrderBy(x => x.CreateDate);
     }
 
     // if (currentTag != null)
@@ -34,13 +35,13 @@
     //    selection = TagQuery.GetContentByTag(currentTag);
     // }
 
-    var itemsPerPage = 6;
+    var itemsPerPage = 4;
 
     if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
         currentPage = 1;
 
     var totalItems = selection?.Count() ?? 0;
-    var pagedItems = selection.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
+    var pagedItems = selection?.Skip((currentPage - 1) * itemsPerPage).Take(itemsPerPage);
 }
 
 @await Html.PartialAsync("static/pageTop")
@@ -60,7 +61,7 @@
                         var thumbnailImage = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
                         var preamble = item?.Value<string>("preamble") ?? "";
 
-                        <a href="@item.Url()">
+                        <a href="@item?.Url()">
                             <div class="card">
                                 <img src="@thumbnailImage" alt="@title" class="card-img">
                                 <div class="card-content">

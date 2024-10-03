@@ -28,29 +28,4 @@
     </div>
 </section>
 
-<section class="question">
-    <div class="w-full d-flex center container">
-        <div class="w-max box">
-            <form>
-                <fieldset>
-                    <legend class="h5">Have a question?</legend>
-                    <div class="input-box">
-                        <label for="name">
-                            <input type="text" name="name" id="name" placeholder="Name">
-                        </label>
-                        <label for="email">
-                            <input type="text" name="email" id="email" placeholder="Email">
-                        </label>
-                        
-                    </div>
-                    <label for="question">
-                        <textarea name="question" id="question" placeholder="Question" rows="6"></textarea>
-                    </label>
-                    <input type="submit" class="btn-theme">
-                </fieldset>
-            </form>
-        </div>
-    </div>
-</section>
-
 @await Html.GetBlockGridHtmlAsync(Model, "pageBottomLayout")
