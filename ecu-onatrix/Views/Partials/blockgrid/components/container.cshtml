@@ -4,7 +4,8 @@
 @{
     //var color = Model?.Content.Value("backgroundColor");
     var colorLabel = Model?.Content.Value<Umbraco.Cms.Core.PropertyEditors.ValueConverters.ColorPickerValueConverter.PickedColor>("backgroundColor").Label.ToLower();
-    var paddingAround = Model?.Content.Value<bool>("paddingAround");
+    var paddingLeftRight = (bool)Model?.Content.Value<bool>("paddingLeftRight");
+    var paddingTopBottom = (bool)Model?.Content.Value<bool>("paddingTopBottom");
 
     string cssClass = "";
     switch(colorLabel) 
@@ -28,8 +29,11 @@
         break;
     }
 
-    if (paddingAround == true)
-        cssClass += "u-p-all";
+    if (paddingLeftRight)
+        cssClass += "u-p-left-right ";
+    
+    if (paddingTopBottom)
+        cssClass += "u-p-top-bottom";
     
 }
 

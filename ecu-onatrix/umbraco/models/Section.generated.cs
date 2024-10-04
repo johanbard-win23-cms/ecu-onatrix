@@ -58,14 +58,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::Umbraco.Cms.Core.PropertyEditors.ValueConverters.ColorPickerValueConverter.PickedColor BackgroundColor => this.Value<global::Umbraco.Cms.Core.PropertyEditors.ValueConverters.ColorPickerValueConverter.PickedColor>(_publishedValueFallback, "backgroundColor");
 
 		///<summary>
-		/// Padding bottom
+		/// Padding bottom: 5rem padding bottom
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[ImplementPropertyType("paddingBottom")]
 		public virtual bool PaddingBottom => this.Value<bool>(_publishedValueFallback, "paddingBottom");
 
 		///<summary>
-		/// Padding top
+		/// Padding top: 5rem padding top
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.2.0+1b21caa")]
 		[ImplementPropertyType("paddingTop")]
